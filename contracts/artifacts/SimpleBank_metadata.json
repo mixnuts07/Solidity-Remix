@@ -1,0 +1,60 @@
+{
+	"compiler": {
+		"version": "0.8.15+commit.e14f2714"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "deposit",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "withdraw",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/payable.sol": "SimpleBank"
+		},
+		"evmVersion": "london",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/payable.sol": {
+			"keccak256": "0xdb20d3112d14c08467a37f4b8d4ae67732646a1ad25c860be51fbaf0c1382500",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://578d34f2974a4c00072e050b91a6823ac609bcee6644e3c7c220dbbcfa63e103",
+				"dweb:/ipfs/QmcgvPzkGkdEoUgbP6Q2Dro1AnzxxxophYFqnbj414npzT"
+			]
+		}
+	},
+	"version": 1
+}
