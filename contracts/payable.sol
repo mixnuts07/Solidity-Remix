@@ -32,12 +32,18 @@ contract Bank{
     }
 
     function withdraw(uint _amount) public{
+        require(balance[msg.sender] >= _amount, "Insufficient Balance");
+        uint beforeWithdraw = balance[msg.sender];
         balance[msg.sender] -= _amount;
         payable(msg.sender).transfer(_amount);
+        uint afterWithdraw = balance[msg.sender];
+        assert(afterWithdraw == beforeWithdraw - _amount);
     }
 
     // Bank Contract内で送金できる関数
     function transfer(address _to, uint _amount) public{
+        require(balance[msg.sender] >= _amount, "Insufficient Balance");
+        require(msg.sender != _to, "Insufficient Recipient");
         balance[msg.sender] -= _amount;
         balance[_to] += _amount;
     }
