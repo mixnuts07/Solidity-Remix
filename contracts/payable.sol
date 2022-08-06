@@ -21,18 +21,34 @@ contract SimpleBank{
 // 誰がいくら入金したかを記録
 contract Bank{
     mapping(address => uint) balance;
-    
+    address owner;
+
+    // アクセスできるOwnerを限定
+    modifier onlyOwner {
+        require(msg.sender == owner, "You Are Not Owner");
+        _;
+    }
+
+    modifier balanceCheck(uint _amount){
+        require(balance[msg.sender] >= _amount, 'Insufficient Balance');
+        _;
+    }
+
+    // ContractをDeployするときに実行される
+    constructor(){
+        owner = msg.sender;
+    }
+
     function getBalance() public view returns(uint){
         return balance[msg.sender];
     }
 
-    function deposit() public payable{
+    function deposit() public payable onlyOwner{
         // msg.value どれくらい送ったか
         balance[msg.sender] += msg.value;
     }
 
-    function withdraw(uint _amount) public{
-        require(balance[msg.sender] >= _amount, "Insufficient Balance");
+    function withdraw(uint _amount) public balanceCheck(_amount){
         uint beforeWithdraw = balance[msg.sender];
         balance[msg.sender] -= _amount;
         payable(msg.sender).transfer(_amount);
@@ -41,8 +57,7 @@ contract Bank{
     }
 
     // Bank Contract内で送金できる関数
-    function transfer(address _to, uint _amount) public{
-        require(balance[msg.sender] >= _amount, "Insufficient Balance");
+    function transfer(address _to, uint _amount) public onlyOwner balanceCheck(_amount){
         require(msg.sender != _to, "Insufficient Recipient");
         balance[msg.sender] -= _amount;
         balance[_to] += _amount;

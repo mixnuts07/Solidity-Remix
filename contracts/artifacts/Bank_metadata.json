@@ -7,6 +7,11 @@
 		"abi": [
 			{
 				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [],
 				"name": "deposit",
 				"outputs": [],
 				"stateMutability": "payable",
@@ -85,11 +90,11 @@
 	},
 	"sources": {
 		"contracts/payable.sol": {
-			"keccak256": "0x1d907344654594311cf78fae5d5e7bcfd6e3c632e4ffecc0949ea4a95379cb44",
+			"keccak256": "0x7f07c1fd4772083ccdcf61e1f99392a99cea4ddf3c8749932e091fc72a3f9c7f",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://41fb81e118d7c0be5bd05c4d64fc9e85723c8cd68f69f6e1b185efdbfbfaa10b",
-				"dweb:/ipfs/Qmb6oQ11Rbgi1Un4F6Z5Sfuo1bhEougxHPKVyMj7Wf8bUP"
+				"bzz-raw://1ff84487d6379aa2fb673f4370b6e1253a42d752b41379808e76aee8691d522a",
+				"dweb:/ipfs/Qmf4C8mKKG8cgUJX4mvcdE8bnPBp9n8ty5N7MVTG1WC9un"
 			]
 		}
 	},
