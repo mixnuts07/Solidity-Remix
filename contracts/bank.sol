@@ -1,6 +1,8 @@
 // SPDX-License-Identifier:MIT
 pragma solidity^0.8.15;
 
+import "./ownable.sol";
+
 // SimpleBankの方は誰でも別の人がDepositしたものでもWithDrawできる！！
 contract SimpleBank{
     // このContractに入金するDeposit関数
@@ -19,26 +21,14 @@ contract SimpleBank{
 }
 
 // 誰がいくら入金したかを記録
-contract Bank{
+contract Bank is Ownable{
     mapping(address => uint) balance;
-    address owner;
-
-    // アクセスできるOwnerを限定
-    modifier onlyOwner {
-        require(msg.sender == owner, "You Are Not Owner");
-        _;
-    }
 
     modifier balanceCheck(uint _amount){
-        require(balance[msg.sender] >= _amount, 'Insufficient Balance');
+        require(balance[msg.sender] >= _amount);    
         _;
     }
-
-    // ContractをDeployするときに実行される
-    constructor(){
-        owner = msg.sender;
-    }
-
+    
     function getBalance() public view returns(uint){
         return balance[msg.sender];
     }
@@ -48,7 +38,7 @@ contract Bank{
         balance[msg.sender] += msg.value;
     }
 
-    function withdraw(uint _amount) public balanceCheck(_amount){
+    function withdraw(uint _amount) public {
         uint beforeWithdraw = balance[msg.sender];
         balance[msg.sender] -= _amount;
         payable(msg.sender).transfer(_amount);
@@ -59,7 +49,13 @@ contract Bank{
     // Bank Contract内で送金できる関数
     function transfer(address _to, uint _amount) public onlyOwner balanceCheck(_amount){
         require(msg.sender != _to, "Insufficient Recipient");
-        balance[msg.sender] -= _amount;
+        _transfer(msg.sender, _to, _amount);
+    }
+
+    // _ で始まるのはPrivate関数
+    // Mintするときによく使われる
+    function _transfer(address _from, address _to, uint _amount) private {
+        balance[_from] -= _amount;
         balance[_to] += _amount;
     }
 }
