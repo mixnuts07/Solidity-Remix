@@ -22,6 +22,10 @@ contract SimpleBank{
 
 // 誰がいくら入金したかを記録
 contract Bank is Ownable{
+
+    // indexed .. フィルタリング（３つまで）
+    event balanceUpdate(string _txType, address indexed _owner, uint _amount);
+
     mapping(address => uint) balance;
 
     modifier balanceCheck(uint _amount){
@@ -36,6 +40,8 @@ contract Bank is Ownable{
     function deposit() public payable onlyOwner{
         // msg.value どれくらい送ったか
         balance[msg.sender] += msg.value;
+
+        emit balanceUpdate("Deposit", msg.sender, balance[msg.sender]);
     }
 
     function withdraw(uint _amount) public {
@@ -44,12 +50,17 @@ contract Bank is Ownable{
         payable(msg.sender).transfer(_amount);
         uint afterWithdraw = balance[msg.sender];
         assert(afterWithdraw == beforeWithdraw - _amount);
+
+        emit balanceUpdate("Withdraw", msg.sender, balance[msg.sender]);
     }
 
     // Bank Contract内で送金できる関数
     function transfer(address _to, uint _amount) public onlyOwner balanceCheck(_amount){
         require(msg.sender != _to, "Insufficient Recipient");
         _transfer(msg.sender, _to, _amount);
+
+        emit balanceUpdate("OutGoing Trasfer", msg.sender, balance[msg.sender]);
+        emit balanceUpdate("InComing Transfer", _to, balance[_to]);
     }
 
     // _ で始まるのはPrivate関数

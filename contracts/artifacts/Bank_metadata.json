@@ -6,6 +6,31 @@
 	"output": {
 		"abi": [
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "_txType",
+						"type": "string"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "_owner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "_amount",
+						"type": "uint256"
+					}
+				],
+				"name": "balanceUpdate",
+				"type": "event"
+			},
+			{
 				"inputs": [],
 				"name": "deposit",
 				"outputs": [],
@@ -85,11 +110,11 @@
 	},
 	"sources": {
 		"contracts/bank.sol": {
-			"keccak256": "0xd29574c63093968c4f4dd3ac736b8ec24d6ef96c02b62b9c1ee58293f9f32c98",
+			"keccak256": "0xf1a64ebaa50a6bf131b1b7fc5d03347963d8a7c35aaca070fc24c5722ca1c002",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://eb9cd6050699bac15866b7ad430d8070abd96f123988bc93582671d15353e1de",
-				"dweb:/ipfs/QmdbviuX9HQF3YBUmu517EW8pfjfUW7fDYZWrzrNjzYDKR"
+				"bzz-raw://6f40bb23e283d570ae4d3cc01498b04319c816ae15bdefd4302ad2a481b69895",
+				"dweb:/ipfs/QmfJ4ocWAwtxMUQF9gtMeJ89ZQLU9MbzBFBjKxu1gseWha"
 			]
 		},
 		"contracts/ownable.sol": {
