@@ -48,11 +48,20 @@ contract Bank is Ownable{
         uint beforeWithdraw = balance[msg.sender];
         balance[msg.sender] -= _amount;
         payable(msg.sender).transfer(_amount);
+        // transferではなくcall版
+        // call はガスを指定できる。　transferは200gasと決まっている。
+        // callでgasを指定しないと全て送られる。
+        // callは関数の呼び出しもできる
+        // (bool success,) = payable(msg.sender).call{value: _amount}("");
+        // require(success, "Transfer unsuccessful!!");
         uint afterWithdraw = balance[msg.sender];
         assert(afterWithdraw == beforeWithdraw - _amount);
 
         emit balanceUpdate("Withdraw", msg.sender, balance[msg.sender]);
     }
+
+    // check effect interaction
+    // DAOハッキング事件防ぐ！！
 
     // Bank Contract内で送金できる関数
     function transfer(address _to, uint _amount) public onlyOwner balanceCheck(_amount){

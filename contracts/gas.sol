@@ -39,12 +39,13 @@ contract GasTest2{
     }
 }
 
-contract GasTest3{
-    uint i;
-    function forever() external returns(uint){
-        while(true){
-            i++;
-        }
-        return i;
-    }
-}
+// 落ちるからNG
+// contract GasTest3{
+//     uint i;
+//     function forever() external returns(uint){
+//         while(true){
+//             i++;
+//         }
+//         return i;
+//     }
+// }
