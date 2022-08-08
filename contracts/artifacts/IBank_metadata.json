@@ -6,38 +6,6 @@
 	"output": {
 		"abi": [
 			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "string",
-						"name": "_txType",
-						"type": "string"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "_owner",
-						"type": "address"
-					},
-					{
-						"indexed": false,
-						"internalType": "uint256",
-						"name": "_amount",
-						"type": "uint256"
-					}
-				],
-				"name": "balanceUpdate",
-				"type": "event"
-			},
-			{
-				"inputs": [],
-				"name": "deposit",
-				"outputs": [],
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "getBalance",
 				"outputs": [
@@ -48,24 +16,6 @@
 					}
 				],
 				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "_to",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_amount",
-						"type": "uint256"
-					}
-				],
-				"name": "transfer",
-				"outputs": [],
-				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
@@ -118,7 +68,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/bank.sol": "Bank"
+			"contracts/nftMarket.sol": "IBank"
 		},
 		"evmVersion": "london",
 		"libraries": {},
@@ -132,12 +82,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/bank.sol": {
-			"keccak256": "0xd0583bd0d908e61a49069bc07bec7e4a56a61e3821ddbb3c53ea91065ec18e94",
+		"contracts/nftMarket.sol": {
+			"keccak256": "0x8cd0f46b05fc4b071e40377049ec04c805724bd288b0608102a5e8d72af84ee3",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://368e298f10e1a1075f32654e835b772bf5016089e446ac30f39414ee1b37bc2d",
-				"dweb:/ipfs/QmWoAVJYUUppgAyzQ9hamvN4a3Uaw3BJMgTxJLNBnMveUV"
+				"bzz-raw://03b2542389b868cde3e07a2eec77dfd427d0538e30166de2579c0b378dcf01c5",
+				"dweb:/ipfs/QmPKSFLCchTZwRfpCqUamWKKZuVGafypRuVqBYMujzisD9"
 			]
 		},
 		"contracts/ownable.sol": {

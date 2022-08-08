@@ -33,18 +33,18 @@ contract Bank is Ownable{
         _;
     }
     
-    function getBalance() public view returns(uint){
+    function getBalance() external view returns(uint){
         return balance[msg.sender];
     }
 
-    function deposit() public payable onlyOwner{
+    function deposit() external payable onlyOwner{
         // msg.value どれくらい送ったか
         balance[msg.sender] += msg.value;
 
         emit balanceUpdate("Deposit", msg.sender, balance[msg.sender]);
     }
 
-    function withdraw(uint _amount) public {
+    function withdraw(uint _amount) external {
         uint beforeWithdraw = balance[msg.sender];
         balance[msg.sender] -= _amount;
         payable(msg.sender).transfer(_amount);
@@ -68,5 +68,17 @@ contract Bank is Ownable{
     function _transfer(address _from, address _to, uint _amount) private {
         balance[_from] -= _amount;
         balance[_to] += _amount;
+    }
+
+    // NFTMarketで使う
+    function transferFrom(address _from, address _to, uint _amount)external{
+        require(balance[_from] >= _amount, "Insufficient balance");
+        require(_from != _to, "Invalid Recepient");
+        balance[_from] -= _amount;
+        balance[_to] += _amount;
+
+        emit balanceUpdate("OutGoing Transfer", _from, balance[_from]);
+        emit balanceUpdate("InComing Transfer", _to, balance[_to]);
+
     }
 }
